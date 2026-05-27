@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Precision OS | Akıllı İş Akışları Platformu</title>
+    <!-- Google Fonts: Inter - Modern, sakin, yüksek okunabilirlik -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FCFCF9;  /* kırık beyaz */
+            color: #1A1F2C;            /* yumuşak siyah / grafit */
+            line-height: 1.4;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Renk değişkenleri */
+        :root {
+            --bg-white: #FCFCF9;
+            --bg-light: #F5F5F2;
+            --graphite: #2C2F36;
+            --soft-black: #1A1F2C;
+            --accent: #0066FF;      /* elektrik mavisi vurgu */
+            --accent-hover: #0052CC;
+            --gray-mid: #6B7280;
+            --gray-light: #E5E7EB;
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.03), 0 2px 4px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.02);
+            --shadow-hover: 0 24px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        /* Tipografi & Temel */
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: clamp(2.8rem, 8vw, 5.2rem);
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Butonlar */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--gray-light);
+            color: var(--soft-black);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+            background-color: rgba(0,102,255,0.02);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            backdrop-filter: blur(12px);
+            background-color: rgba(252, 252, 249, 0.85);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+            transition: all 0.2s;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.6rem;
+            letter-spacing: -0.03em;
+            color: var(--soft-black);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--graphite);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text .manifesto {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--gray-mid);
+            max-width: 90%;
+            margin: 1.5rem 0 2rem;
+            line-height: 1.5;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Dashboard Mockup (Hero) */
+        .dashboard-mockup {
+            background: #FFFFFF;
+            border-radius: 28px;
+            box-shadow: var(--shadow-hover);
+            padding: 1.5rem;
+            border: 1px solid var(--gray-light);
+            transition: transform 0.3s ease;
+        }
+
+        .mockup-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.8rem;
+            align-items: center;
+        }
+
+        .mockup-dots {
+            display: flex;
+            gap: 8px;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: #DDD;
+            border-radius: 50%;
+        }
+        .mockup-stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+        }
+        .stat-card {
+            background: #F8F9FC;
+            padding: 0.8rem;
+            border-radius: 18px;
+            flex: 1;
+        }
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #EFEFEF;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        .feature-card {
+            background: white;
+            padding: 2rem 1.5rem;
+            border-radius: 28px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.25s ease;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(0,102,255,0.1);
+        }
+        .feature-icon {
+            font-size: 2.2rem;
+            margin-bottom: 1.2rem;
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.6rem;
+        }
+        .feature-card p {
+            color: var(--gray-mid);
+            line-height: 1.5;
+        }
+
+        /* Product Demo (Ekran Görüntüleri) */
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .demo-card {
+            background: white;
+            border-radius: 28px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            border: 1px solid var(--gray-light);
+        }
+        .demo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        .demo-img {
+            background: #F1F5F9;
+            border-radius: 20px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+            font-weight: 500;
+            color: var(--graphite);
+        }
+
+        /* Metrics (Sayaçlar) */
+        .metrics-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        .metric-item {
+            flex: 1;
+            min-width: 180px;
+        }
+        .metric-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--soft-black);
+            letter-spacing: -0.02em;
+        }
+        .metric-label {
+            color: var(--gray-mid);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        /* Testimonials */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 28px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #f0f0f0;
+        }
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #2C2F36;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+        .testimonial-author {
+            font-weight: 600;
+        }
+        .testimonial-title {
+            font-size: 0.8rem;
+            color: var(--gray-mid);
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .pricing-card {
+            background: white;
+            border-radius: 32px;
+            padding: 2rem 2rem 2rem 2rem;
+            flex: 1;
+            min-width: 250px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.25s;
+            border: 1px solid var(--gray-light);
+        }
+        .pricing-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .price {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+        .feature-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        .feature-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            text-align: center;
+            background: #F1F4F9;
+            border-radius: 48px;
+            padding: 4rem 2rem;
+            margin: 2rem auto;
+        }
+        .final-cta h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+        }
+
+        /* footer */
+        .footer {
+            border-top: 1px solid var(--gray-light);
+            padding: 2.5rem 5%;
+            text-align: center;
+            color: var(--gray-mid);
+            font-size: 0.85rem;
+        }
+
+        /* Animasyon / Reveal */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .nav-links {
+                gap: 1.2rem;
+            }
+            .section {
+                padding: 70px 5%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .cta-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="#" class="logo">Precision<span>OS</span></a>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#demo">Product</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact" class="btn btn-outline" style="padding: 8px 20px;">Start Free</a>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero section" id="home">
+        <div class="container hero-grid">
+            <div class="hero-text fade-up">
+                <div class="manifesto">PRECISION FIRST</div>
+                <h1>WORK AT THE<br>SPEED OF THOUGHT.</h1>
+                <p>Build faster. Think smarter. Move with precision. <br>Akıllı iş akışları, AI destekli öngörüler ve gerçek zamanlı iş birliği — modern ekipler için tasarlandı.</p>
+                <div class="cta-group">
+                    <a href="#" class="btn btn-primary">START FREE →</a>
+                    <a href="#" class="btn btn-outline">VIEW DEMO</a>
+                    <a href="#" class="btn btn-outline">BOOK A DEMO</a>
+                </div>
+            </div>
+            <div class="dashboard-mockup fade-up">
+                <div class="mockup-header">
+                    <div class="mockup-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                    <span style="font-size:0.8rem; color:#6B7280;">Workflow / Q1</span>
+                </div>
+                <div class="mockup-stats">
+                    <div class="stat-card"><strong>✔️ 23</strong><br>Tasks done</div>
+                    <div class="stat-card"><strong>⚡ 4.2x</strong><br>Faster</div>
+                </div>
+                <div class="task-item"><span>Design review</span><span style="color:#0066FF;">In progress</span></div>
+                <div class="task-item"><span>Frontend deployment</span><span style="color:#10B981;">Done</span></div>
+                <div class="task-item"><span>AI sprint analysis</span><span style="color:#F59E0B;">Pending</span></div>
+                <div style="margin-top:1rem; background:#EFF3F8; border-radius:40px; height:6px; width:100%"><div style="width:74%; background:#0066FF; height:6px; border-radius:40px;"></div></div>
+                <div style="margin-top: 1rem; display: flex; justify-content: space-between; font-size:0.75rem;"><span>Productivity +47%</span><span>AI insights active</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="fade-up" style="text-align:center; margin-bottom: 2rem;">
+                <h2>Designed for intelligent teams</h2>
+                <p style="color: var(--gray-mid); max-width: 600px; margin: 0 auto;">Her özellik, hız ve netlik için minimal ancak güçlü.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-up"><div class="feature-icon">⚡</div><h3>Smart Workflows</h3><p>Yapay zeka ile otomatik yol haritaları, manuel sürtüşmeyi ortadan kaldırır.</p></div>
+                <div class="feature-card fade-up"><div class="feature-icon">🧠</div><h3>AI Insights</h3><p>Gelişmiş analiz ve tahminlerle veriye dayalı stratejiler oluşturun.</p></div>
+                <div class="feature-card fade-up"><div class="feature-icon">🤝</div><h3>Team Collaboration</h3><p>Gerçek zamanlı senkronizasyon, anlık bildirimler ve ortak çalışma alanları.</p></div>
+                <div class="feature-card fade-up"><div class="feature-icon">📈</div><h3>Analytics & Tracking</h3><p>Gerçek zamanlı metrikler ve özelleştirilebilir dashboard’lar.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Demo Area (modern görseller) -->
+    <section class="section" id="demo" style="background: var(--bg-light); border-radius: 48px; margin: 20px 5%;">
+        <div class="container">
+            <div class="fade-up" style="text-align:center; margin-bottom: 2rem;">
+                <h2>Product experience, redefined</h2>
+                <p>Hassas hareket eden ekipler için oluşturulmuş arayüz.</p>
+            </div>
+            <div class="demo-grid">
+                <div class="demo-card fade-up">
+                    <div class="demo-img">📊 Workflow Dashboard<br><span style="font-size:0.7rem;">drag & drop, otomasyon</span></div>
+                    <h3>Akıllı Görev Yönetimi</h3>
+                    <p>Kritik yolları anlık işaretleme ve otomatik önceliklendirme.</p>
+                </div>
+                <div class="demo-card fade-up">
+                    <div class="demo-img">📈 AI Analytics Hub<br><span style="font-size:0.7rem;">tahmin modelleri</span></div>
+                    <h3>Gerçek Zamanlı Öngörüler</h3>
+                    <p>Makine öğrenmesi ile ekip verimlilik darboğazlarını tespit edin.</p>
+                </div>
+                <div class="demo-card fade-up">
+                    <div class="demo-img">👥 Collaboration Space<br><span style="font-size:0.7rem;">canlı mesajlaşma</span></div>
+                    <h3>Senkronize İşbirliği</h3>
+                    <p>Anlık güncellemeler ve entegre dosya paylaşımı.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics & Performance (Animasyonlu sayaçlar) -->
+    <section class="section">
+        <div class="container">
+            <div class="fade-up" style="text-align:center; margin-bottom: 1rem;">
+                <h2>Performance that scales</h2>
+                <p>Dünyanın dört bir yanındaki ekipler PrecisionOS ile dönüşüyor.</p>
+            </div>
+            <div class="metrics-container" id="metrics-container">
+                <div class="metric-item"><div class="metric-number" data-target="4.2">0</div><div class="metric-label">× Faster Workflow</div></div>
+                <div class="metric-item"><div class="metric-number" data-target="89">0</div><div class="metric-label">% Time Saved</div></div>
+                <div class="metric-item"><div class="metric-number" data-target="10">0</div><div class="metric-label">K+ Teams</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" style="background: #FFFFFF;">
+        <div class="container">
+            <div class="fade-up" style="text-align:center; margin-bottom: 2rem;">
+                <h2>Trusted by forward-thinking teams</h2>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card fade-up">
+                    <div class="testimonial-text">“PrecisionOS, ekip içi iletişimimizi %60 oranında hızlandırdı. AI önerileri gerçekten isabetli ve dashboard inanılmaz akıcı.”</div>
+                    <div class="testimonial-author">— Selin Yılmaz</div>
+                    <div class="testimonial-title">Product Lead, NexusTech</div>
+                </div>
+                <div class="testimonial-card fade-up">
+                    <div class="testimonial-text">“Veriye dayalı karar alma sürecimizi tamamen değiştirdi. Premium deneyim ve hız, rakiplerden ayrıştırıyor.”</div>
+                    <div class="testimonial-author">— Caner Demir</div>
+                    <div class="testimonial-title">CTO, InnovateX</div>
+                </div>
+                <div class="testimonial-card fade-up">
+                    <div class="testimonial-text">“SaaS dünyasında bu kadar temiz ve güçlü bir arayüz nadir. Hız, güven ve verimlilik vaatlerinin tamamı karşılandı.”</div>
+                    <div class="testimonial-author">— Elif Korkmaz</div>
+                    <div class="testimonial-title">Operations Director, ScaleFlow</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section" id="pricing">
+        <div class="container">
+            <div class="fade-up" style="text-align:center;">
+                <h2>Simple, transparent pricing</h2>
+                <p>İhtiyacınıza uygun planı seçin. Her zaman yükseltme imkanı.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card fade-up">
+                    <h3>Starter</h3>
+                    <div class="price">$29<span style="font-size:1rem;">/month</span></div>
+                    <ul class="feature-list">
+                        <li>✓ 10 users included</li>
+                        <li>✓ Smart workflows</li>
+                        <li>✓ Basic analytics</li>
+                        <li>✓ Community support</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="width:100%;">Get Started</a>
+                </div>
+                <div class="pricing-card fade-up" style="border-top: 3px solid var(--accent);">
+                    <h3>Pro</h3>
+                    <div class="price">$79<span style="font-size:1rem;">/month</span></div>
+                    <ul class="feature-list">
+                        <li>✓ Unlimited users</li>
+                        <li>✓ AI Insights & predictions</li>
+                        <li>✓ Advanced analytics + API</li>
+                        <li>✓ Priority support</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width:100%;">Start Free Trial</a>
+                </div>
+                <div class="pricing-card fade-up">
+                    <h3>Enterprise</h3>
+                    <div class="price">Custom</div>
+                    <ul class="feature-list">
+                        <li>✓ SSO & SAML</li>
+                        <li>✓ Dedicated success manager</li>
+                        <li>✓ SLA guarantee 99.99%</li>
+                        <li>✓ On-premise optional</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="width:100%;">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section" id="contact">
+        <div class="container final-cta fade-up">
+            <h2>READY TO MOVE FASTER?</h2>
+            <p style="font-size:1.3rem; margin: 1rem 0 2rem;">Work smarter. Scale faster.</p>
+            <div class="cta-group" style="justify-content:center;">
+                <a href="#" class="btn btn-primary">BOOK A DEMO →</a>
+                <a href="#" class="btn btn-outline">START FREE</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2025 PrecisionOS — A product of NexBoom Studios. Built for precision, speed & intelligence.</p>
+    </footer>
+</main>
+
+<script>
+    (function() {
+        // Fade-up reveal with Intersection Observer
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+        fadeElements.forEach(el => observer.observe(el));
+        
+        // Sayac Animasyonu (metrics)
+        const metricNumbers = document.querySelectorAll('.metric-number');
+        let counted = false;
+        const metricsSection = document.getElementById('metrics-container');
+        const startCounting = () => {
+            if (counted) return;
+            metricNumbers.forEach(el => {
+                const target = parseFloat(el.getAttribute('data-target'));
+                if (isNaN(target)) return;
+                let current = 0;
+                const increment = target / 45;
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        if (target >= 10 && target < 100) {
+                            el.innerText = Math.floor(current);
+                        } else if (target === 4.2) {
+                            el.innerText = current.toFixed(1);
+                        } else {
+                            el.innerText = Math.floor(current);
+                        }
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        if (target === 4.2) el.innerText = target.toFixed(1);
+                        else if (target >= 1000) el.innerText = Math.floor(target)+'+';
+                        else el.innerText = Math.floor(target);
+                    }
+                };
+                updateCounter();
+            });
+            counted = true;
+        };
+        
+        const metricsObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !counted) {
+                startCounting();
+                metricsObserver.unobserve(metricsSection.parentElement);
+            }
+        }, { threshold: 0.4 });
+        if (metricsSection) metricsObserver.observe(metricsSection);
+        // Fallback if metricsSection exists
+        if (!metricsSection) console.log("no metrics");
+        
+        // Navbar scroll arkaplan efekti (hafif)
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.style.backgroundColor = 'rgba(252, 252, 249, 0.96)';
+                navbar.style.borderBottom = '1px solid rgba(0,0,0,0.05)';
+            } else {
+                navbar.style.backgroundColor = 'rgba(252, 252, 249, 0.85)';
+                navbar.style.borderBottom = '1px solid rgba(0,0,0,0.03)';
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === "#" || targetId === "") return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // ek olarak demo kartlara küçük hover vs zaten css'de
+        // hero'daki mockup sayfa açılışında hafif fade-up
+        setTimeout(() => {
+            document.querySelectorAll('.hero .fade-up').forEach(el => el.classList.add('visible'));
+        }, 100);
+    })();
+</script>
+</body>
+</html>
